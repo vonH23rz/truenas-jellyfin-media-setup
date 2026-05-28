@@ -1,0 +1,40 @@
+# TrueNAS SCALE Jellyfin media setup configuration
+# Copy this file to media-setup.conf and edit it before running scripts.
+
+# Pool name. This repository assumes /mnt/tank/media by default.
+POOL="tank"
+
+# Parent media dataset name.
+MEDIA_DATASET="media"
+
+# Child datasets under /mnt/${POOL}/${MEDIA_DATASET}
+# Keep names simple: lowercase, no spaces.
+CHILD_DATASETS="movies tv downloads anime kids xxx music"
+
+# Dataset preset / share_type used by pool.dataset.create.
+# MULTIPROTOCOL is recommended when the same path is used by SMB clients and local apps/containers.
+# If your TrueNAS version rejects this value, change it to SMB and rerun the dataset script.
+DATASET_SHARE_TYPE="MULTIPROTOCOL"
+
+# SMB share exported to clients. This becomes: \\truenas-host\media
+SMB_SHARE_NAME="media"
+SMB_SHARE_COMMENT="Jellyfin media library"
+SMB_PURPOSE="MULTIPROTOCOL_SHARE"
+
+# Human SMB users should be placed in this group.
+# The ACL script creates the group if it does not already exist.
+SMB_GROUP="media_rw"
+
+# TrueNAS app default account for many apps, including Jellyfin default settings.
+# Current TrueNAS Jellyfin docs use UID/GID 568 (apps) by default.
+APP_UID="568"
+APP_GID="568"
+
+# ACL behavior.
+# APPLY_RECURSIVE=false is safer on existing data.
+# Set true only on a fresh dataset or when you intentionally want to overwrite inherited ACLs on existing files.
+APPLY_RECURSIVE="false"
+TRAVERSE_DATASETS="false"
+
+# Safety guard. Set to true if scripts may operate on existing datasets.
+ALLOW_EXISTING_DATASETS="true"
