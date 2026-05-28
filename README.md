@@ -59,7 +59,8 @@ Clone or copy this repository to your TrueNAS SCALE host.
 ```bash
 cd /root
 # Example after upload/git clone:
-cd truenas-jellyfin-media-repo
+git clone https://github.com/vonH23rz/truenas-jellyfin-media-setup.git
+cd truenas-jellyfin-media-setup
 cp media-setup.conf.example media-setup.conf
 nano media-setup.conf
 ```
