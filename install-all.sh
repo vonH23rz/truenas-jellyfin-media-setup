@@ -2,11 +2,11 @@
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-"${SCRIPT_DIR}/scripts/00-check-truenas.sh"
-"${SCRIPT_DIR}/scripts/10-create-datasets.sh"
-"${SCRIPT_DIR}/scripts/20-apply-media-acl.sh"
-"${SCRIPT_DIR}/scripts/30-create-smb-share.sh"
-"${SCRIPT_DIR}/scripts/90-verify-media-setup.sh"
+bash "${SCRIPT_DIR}/scripts/00-check-truenas.sh"
+bash "${SCRIPT_DIR}/scripts/10-create-datasets.sh"
+bash "${SCRIPT_DIR}/scripts/20-apply-media-acl.sh"
+bash "${SCRIPT_DIR}/scripts/30-create-smb-share.sh"
+bash "${SCRIPT_DIR}/scripts/90-verify-media-setup.sh"
 
 cat <<'DONE'
 
