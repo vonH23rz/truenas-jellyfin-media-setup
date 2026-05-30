@@ -1,0 +1,5 @@
+# Local runtime config
+media-setup.conf
+
+# Local safety backups created during manual validation
+*.backup-before-*

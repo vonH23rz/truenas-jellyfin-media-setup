@@ -84,7 +84,7 @@ print(json.dumps({
 }))
 PY
 )"
-  midclt call -job filesystem.setacl "${payload}" >/dev/null
+  midclt call --job filesystem.setacl "${payload}" >/dev/null
 }
 
 # Apply to parent and every child dataset mountpoint. This avoids relying on ACL inheritance across dataset boundaries.
@@ -95,8 +95,4 @@ done
 
 echo
 echo "ACL summary:"
-midclt call filesystem.getacl "$(python3 - "${MEDIA_PATH}" <<'PY'
-import json, sys
-print(json.dumps({"path": sys.argv[1], "simplified": True, "resolve_ids": True}))
-PY
-)"
+midclt call filesystem.getacl "${MEDIA_PATH}"

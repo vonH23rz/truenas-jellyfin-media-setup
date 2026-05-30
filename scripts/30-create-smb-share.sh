@@ -36,8 +36,11 @@ PY
 fi
 
 echo "Starting/restarting SMB service..."
-midclt call -job service.control START cifs '{"silent": false}' >/dev/null || \
-midclt call -job service.control RESTART cifs '{"silent": false}' >/dev/null || true
+CIFS_SERVICE_ID="$(midclt call service.query '[["service","=","cifs"]]' | python3 -c 'import json,sys; print(json.load(sys.stdin)[0]["id"])')"
+midclt call service.update "${CIFS_SERVICE_ID}" '{"enable": true}' >/dev/null
+
+midclt call --job service.control START cifs '{"silent": false}' >/dev/null || \
+midclt call --job service.control RESTART cifs '{"silent": false}' >/dev/null || true
 
 echo
 echo "SMB share configured. Access it as:"

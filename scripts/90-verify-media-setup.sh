@@ -51,11 +51,7 @@ fi
 
 echo
 echo "Filesystem ACL on parent dataset:"
-midclt call filesystem.getacl "$(python3 - "${MEDIA_PATH}" <<'PY'
-import json, sys
-print(json.dumps({"path": sys.argv[1], "simplified": True, "resolve_ids": True}))
-PY
-)" || fail=1
+midclt call filesystem.getacl "${MEDIA_PATH}" || fail=1
 
 echo
 echo "SMB service status:"

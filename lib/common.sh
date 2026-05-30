@@ -62,7 +62,7 @@ PY
 
 json_first_field() {
   local field="$1"
-  python3 - "$field" <<'PY'
+  python3 -c '
 import json, sys
 field = sys.argv[1]
 data = json.load(sys.stdin)
@@ -70,10 +70,10 @@ if not data:
     print("")
 else:
     val = data[0]
-    for part in field.split('.'):
+    for part in field.split("."):
         val = val.get(part, "") if isinstance(val, dict) else ""
     print("" if val is None else val)
-PY
+' "$field"
 }
 
 bool_json() {
